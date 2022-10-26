@@ -10,6 +10,10 @@ const mushroomSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
+        isEdible: {
+            type: Boolean,
+            required: true,
+        },
 		owner: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',

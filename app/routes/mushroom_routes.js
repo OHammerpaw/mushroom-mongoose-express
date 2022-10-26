@@ -27,6 +27,19 @@ const requireToken = passport.authenticate('bearer', { session: false })
 // instantiate a router (mini app that only handles routes)
 const router = express.Router()
 
+// Index
+// /mushrooms
+router.get('/mushrooms', requireToken, (req, res, next) => {
+    Mushroom.find()
+        .then(mushrooms => {
+            return mushrooms.map(mushroom => mushroom)
+        })
+        .then(mushrooms =>  {
+            res.status(200).json({ mushrooms: mushrooms })
+        })
+        .catch(next)
+})
+
 // Create
 // /mushroom
 router.post('/mushrooms', requireToken, (req, res, next) => {
