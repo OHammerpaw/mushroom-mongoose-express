@@ -40,6 +40,18 @@ router.get('/mushrooms', requireToken, (req, res, next) => {
         .catch(next)
 })
 
+//Show
+// /mushrooms/:id
+router.get('/mushrooms/:id', requireToken, (req, res, next) => {
+    Mushroom.findById(req.params.id)
+    .then(handle404)
+    .then(mushroom => {
+        res.status(200).json({mushroom: mushroom })
+    })
+    .catch(next)
+
+})
+
 // Create
 // /mushroom
 router.post('/mushrooms', requireToken, (req, res, next) => {
