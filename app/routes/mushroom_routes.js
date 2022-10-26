@@ -83,5 +83,19 @@ router.patch('/mushrooms/:id', requireToken, removeBlanks, (req, res, next) => {
 
 })
 
+//DESTROY
+// /mushrooms/:id
+router.delete('/mushrooms/:id', requireToken, (req, res, next) => {
+    Mushroom.findById(req.params.id)
+    .then(handle404)
+    .then((mushroom) => {
+        requireOwnership(req, mushroom)
+        mushroom.deleteOne()
+
+    })
+    .then(() => res.sendStatus(204))
+    .catch(next)
+})
+
 
 module.exports = router
