@@ -66,5 +66,22 @@ router.post('/mushrooms', requireToken, (req, res, next) => {
 
 })
 
+// Update
+// /mushrooms/:id
+router.patch('/mushrooms/:id', requireToken, removeBlanks, (req, res, next) => {
+    delete req.body.mushroom.owner
+
+    Mushroom.findById(req.params.id)
+    .then(handle404)
+    .then(mushroom => {
+        requireOwnership(req, mushroom)
+
+        return mushroom.updateOne(req.body.mushroom)
+    })
+    .then(() => res.sendStatus(204))
+    .catch(next)
+
+})
+
 
 module.exports = router
