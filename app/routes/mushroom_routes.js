@@ -56,6 +56,7 @@ router.get('/mushrooms/:id', requireToken, (req, res, next) => {
 // /mushroom
 router.post('/mushrooms', requireToken, (req, res, next) => {
     req.body.mushroom.owner = req.user.id
+    req.body.mushroom.isEdible = req.body.mushroom.isEdible === 'on' ? true : false
     
     Mushroom.create(req.body.mushroom)
     .then(mushroom => {
