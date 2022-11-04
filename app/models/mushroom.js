@@ -16,7 +16,7 @@ const mushroomSchema = new mongoose.Schema(
             type: Boolean,
             required: true,
         },
-        fairies: [fairySchema],
+        faeries: [fairySchema],
 		owner: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',
