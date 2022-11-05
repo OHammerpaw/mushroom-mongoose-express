@@ -3,7 +3,7 @@ const express = require('express')
 // Passport docs: http://www.passportjs.org/docs/
 const passport = require('passport')
 
-// pull in Mongoose model for examples
+// pull in Mongoose model for mushrooms
 const Mushroom = require('../models/mushroom')
 
 // this is a collection of methods that help us detect situations when we need
@@ -29,8 +29,9 @@ const router = express.Router()
 
 // Index
 // /mushrooms
-router.get('/mushrooms', requireToken, (req, res, next) => {
+router.get('/mushrooms', (req, res, next) => {
     Mushroom.find()
+        .populate('owner')
         .then(mushrooms => {
             return mushrooms.map(mushroom => mushroom)
         })
@@ -42,13 +43,14 @@ router.get('/mushrooms', requireToken, (req, res, next) => {
 
 //Show
 // /mushrooms/:id
-router.get('/mushrooms/:id', requireToken, (req, res, next) => {
+router.get('/mushrooms/:id', (req, res, next) => {
     Mushroom.findById(req.params.id)
-    .then(handle404)
-    .then(mushroom => {
-        res.status(200).json({mushroom: mushroom })
-    })
-    .catch(next)
+        .populate('owner')
+        .then(handle404)
+        .then(mushroom => {
+            res.status(200).json({ mushroom: mushroom })
+        })
+        .catch(next)
 
 })
 
@@ -56,15 +58,12 @@ router.get('/mushrooms/:id', requireToken, (req, res, next) => {
 // /mushroom
 router.post('/mushrooms', requireToken, (req, res, next) => {
     req.body.mushroom.owner = req.user.id
-    req.body.mushroom.isEdible = req.body.mushroom.isEdible === 'on' ? true : false
-    
+    // req.body.mushroom.isEdible = req.body.mushroom.isEdible === 'on' ? true : false
     Mushroom.create(req.body.mushroom)
     .then(mushroom => {
         res.status(201).json({ mushroom: mushroom })
     })
     .catch(next)
-    // .catch(error => next(error))
-
 })
 
 // Update
@@ -73,14 +72,14 @@ router.patch('/mushrooms/:id', requireToken, removeBlanks, (req, res, next) => {
     delete req.body.mushroom.owner
 
     Mushroom.findById(req.params.id)
-    .then(handle404)
-    .then(mushroom => {
-        requireOwnership(req, mushroom)
+        .then(handle404)
+        .then(mushroom => {
+            requireOwnership(req, mushroom)
 
-        return mushroom.updateOne(req.body.mushroom)
-    })
-    .then(() => res.sendStatus(204))
-    .catch(next)
+            return mushroom.updateOne(req.body.mushroom)
+        })
+        .then(() => res.sendStatus(204))
+        .catch(next)
 
 })
 

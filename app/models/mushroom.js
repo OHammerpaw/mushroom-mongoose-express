@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+const fairySchema = require('./fairy')
+
 const mushroomSchema = new mongoose.Schema(
 	{
 		commonName: {
@@ -14,6 +16,7 @@ const mushroomSchema = new mongoose.Schema(
             type: Boolean,
             required: true,
         },
+        faeries: [fairySchema],
 		owner: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',
