@@ -9,8 +9,9 @@ processes = []
   builder = "heroku/buildpacks:20"
 
 [env]
-  MONGODB_URI = "mongodb+srv://thelibrarian:baggins42@cluster0.y30im78.mongodb.net/mushroom-mongoose-express?retryWrites=true&w=majority"
   PORT = "8080"
+  MONGODB_URI = "mongodb+srv://thelibrarian:baggins42@cluster0.y30im78.mongodb.net/mushroom-mongoose-express?retryWrites=true&w=majority"
+  
 
 [experimental]
   allowed_public_ports = []
