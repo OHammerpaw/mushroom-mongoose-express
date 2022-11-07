@@ -9,7 +9,7 @@ const fairySchema = new mongoose.Schema({
     description: {
         type: String
     },
-    consdition: {
+    type: {
         type: String,
         enum: ['pixie', 'sprite', 'leprechaun'],
         default: 'pixie'
