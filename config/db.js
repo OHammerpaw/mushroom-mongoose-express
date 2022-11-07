@@ -6,8 +6,8 @@ const mongooseBaseName = 'mushroom-mongoose-express'
 
 // create the mongodb uri for development and test
 const database = {
-	development: `mongodb://localhost/${mongooseBaseName}-development`,
-	test: `mongodb://localhost/${mongooseBaseName}-test`,
+	development: `mongodb+srv://thelibrarian:baggins42@cluster0.y30im78.mongodb.net/${mongooseBaseName}?retryWrites=true&w=majority`,
+	test: `mongodb+srv://thelibrarian:baggins42@cluster0.y30im78.mongodb.net/${mongooseBaseName}-test?retryWrites=true&w=majority`,
 }
 
 // Identify if development environment is test or development

@@ -1,6 +1,6 @@
-# fly.toml file generated for mushroom-forest on 2022-11-07T14:55:02-05:00
+# fly.toml file generated for mushroom-mushroom-api on 2022-11-07T17:45:44-05:00
 
-app = "mushroom-forest"
+app = "mushroom-mushroom-api"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
@@ -9,9 +9,8 @@ processes = []
   builder = "heroku/buildpacks:20"
 
 [env]
+  MONGODB_URI = "mongodb+srv://thelibrarian:baggins42@cluster0.y30im78.mongodb.net/mushroom-mongoose-express?retryWrites=true&w=majority"
   PORT = "8080"
-  MONGODB_URI= "mongodb+srv://thelibrarian:baggins42@cluster0.y30im78.mongodb.net/mushroom-mongoose-express?retryWrites=true&w=majority"
-  
 
 [experimental]
   allowed_public_ports = []
