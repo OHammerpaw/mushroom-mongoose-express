@@ -11,7 +11,7 @@ processes = []
 [env]
   PORT = "8080"
   MONGODB_URI = "mongodb+srv://thelibrarian:baggins42@cluster0.y30im78.mongodb.net/mushroom-mongoose-express?retryWrites=true&w=majority"
-  Client_Origin = "https://mushroom-mushroom.netlify.app"
+  CLIENT_ORIGIN = "https://mushroom-mushroom.netlify.app"
   
 
 [experimental]
